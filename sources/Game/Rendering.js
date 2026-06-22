@@ -37,16 +37,25 @@ export class Rendering
 
     async setRenderer()
     {
-        // antialias MUST be false when using RenderPipeline (post-processing).
-        // On WebGPU, enabling MSAA on the swap chain while the pipeline renders through
-        // off-screen textures causes a format mismatch — the canvas presents blank frames.
-        // This primarily affects desktop (pixelRatio=1) where antialias would otherwise
-        // be true; mobile (pixelRatio≥2) was already safe. RenderPipeline provides its
-        // own AA via the bloom/DOF passes anyway.
+        // Force WebGL2 backend via THREE.WebGPURenderer.
+        //
+        // Problem: hardware WebGPU adapter negotiation fails silently on many real desktop
+        // GPUs (driver policy, adapter=null, device creation errors) — the canvas stays
+        // blank with no console error visible to the user. Cloud/software renderers
+        // (SwiftShader, Mesa) are unaffected because they bypass hardware adapter selection.
+        // Mobile browsers either lack WebGPU support entirely or have more stable GPU
+        // driver stacks.
+        //
+        // Fix: forceWebGL:true makes THREE.WebGPURenderer use WebGL2 as its backend.
+        // All TSL-based post-processing (RenderPipeline, bloom, cheapDOF) is unaffected —
+        // TSL compiles to GLSL on WebGL2. This also makes tablet browsers (iPadOS Safari,
+        // Android Chrome) use the same stable path without any user-agent sniffing.
+        // The only feature skipped is PreRenderer (a shader warm-up optimisation gated
+        // behind isWebGPUBackend in Game.js, not required for correct rendering).
         this.renderer = new THREE.WebGPURenderer({
             canvas: this.game.canvasElement,
             powerPreference: 'high-performance',
-            forceWebGL: false,
+            forceWebGL: true,
             antialias: false
         })
 
@@ -68,14 +77,18 @@ export class Rendering
             this.renderer.inspector = new Inspector()
         }
 
-        // Await init before setting size — on WebGPU, init() is truly async (GPU adapter
-        // negotiation). Calling setSize before init completes leaves the swap chain with
-        // wrong dimensions on some desktop drivers.
         await this.renderer.init()
 
-        // Set canvas size after init so the GPU swap chain is configured correctly
+        // Diagnostic log — confirms which backend is active and canvas dimensions
+        const backend = this.renderer.backend
+        console.log('[Rendering] backend:', backend.isWebGPUBackend ? 'WebGPU' : 'WebGL2', '| canvas:', this.renderer.domElement.width, '×', this.renderer.domElement.height)
+
+        // Set size after init so the GPU context is configured with correct dimensions
         this.renderer.setSize(this.game.viewport.width, this.game.viewport.height)
         this.renderer.setPixelRatio(this.game.viewport.pixelRatio)
+
+        // Trigger a resize event so the camera aspect ratio is updated before the first frame
+        window.dispatchEvent(new Event('resize'))
 
         // Start the animation loop only after full initialisation
         this.renderer.setAnimationLoop((elapsedTime) => { this.game.ticker.update(elapsedTime) })

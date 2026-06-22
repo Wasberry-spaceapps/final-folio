@@ -1,0 +1,115 @@
+The blank canvas on PC desktop is the **one remaining issue**. Everything else is working — do not touch audio, mobile rendering, the build workflow, environmental sounds, menu, or map.
+
+### 🔑 THE KEY DIAGNOSTIC CLUE
+
+Here is what we know for certain:
+
+| Environment | Result |
+|---|---|
+| Real PC desktop (Chrome/Firefox) | ❌ Blank canvas after start |
+| Second PC (fresh, C: drive not full) | ❌ Same blank canvas |
+| Mobile browser | ✅ Works perfectly |
+| **LambdaTest cloud desktop browser** | ✅ **Works perfectly** |
+
+**This is not a code logic issue and not an asset size issue.** If it were either of those, LambdaTest would also fail.
+
+The critical difference between LambdaTest and a real PC browser is: **LambdaTest cloud VMs have no real GPU hardware.** They render via software (SwiftShader/Mesa/llvmpipe). Real desktop PCs have actual GPU hardware and attempt hardware-accelerated rendering.
+
+This means the failure is happening specifically when the browser tries to use **real GPU hardware acceleration** — which points directly to **WebGPU hardware adapter negotiation failing silently on real desktop GPUs**, while mobile uses WebGL2 and LambdaTest falls back to software WebGL, both of which bypass the problem entirely.
+
+---
+
+### 🔍 What to investigate and fix
+
+**Step 1 — Identify the renderer being used**
+
+In the renderer initialization code, add a console.log immediately after init resolves that clearly states:
+- Which renderer type is active (`WebGPURenderer` vs `WebGLRenderer`)
+- Whether WebGPU was attempted and what the adapter/device returned
+- The canvas width and height at that moment
+
+This will confirm the theory in production (check browser console on the real PC at wasiu.tech).
+
+**Step 2 — The likely root cause: WebGPU hardware adapter returning null**
+
+On real desktop hardware, `navigator.gpu.requestAdapter()` can return `null` or throw depending on the GPU driver, browser version, and OS GPU policy — with **no visible error to the user**. If the code does something like:
+
+```js
+const adapter = await navigator.gpu.requestAdapter();
+const device = await adapter.requestDevice(); // 💥 crashes if adapter is null
+```
+
+...the entire renderer init crashes silently, the canvas stays blank, and no fallback occurs. Mobile works because it either doesn't attempt WebGPU, or it falls through to WebGL2 successfully.
+
+**Step 3 — The fix: Robust WebGPU detection with guaranteed WebGL2 fallback**
+
+Wrap the entire WebGPU init path in a try/catch with an explicit WebGL2 fallback. The pattern should be:
+
+```js
+async initRenderer() {
+  let useWebGPU = false;
+
+  if (navigator.gpu) {
+    try {
+      const adapter = await navigator.gpu.requestAdapter();
+      if (adapter) {
+        const device = await adapter.requestDevice();
+        if (device) useWebGPU = true;
+      }
+    } catch (e) {
+      console.warn('WebGPU unavailable, falling back to WebGL2:', e);
+    }
+  }
+
+  if (useWebGPU) {
+    // initialize WebGPU renderer
+  } else {
+    // initialize WebGL2 renderer — this MUST work on all platforms
+    this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  }
+}
+```
+
+If the project is using Three.js's experimental `WebGPURenderer` class directly, consider switching to `WebGLRenderer` as the **primary renderer for all platforms** unless WebGPU support can be verified end-to-end. The 3D portfolio will run beautifully on WebGL2 — this is what bruno-simon.com and virtually every other Three.js portfolio uses.
+
+**Step 4 — Force a resize after init**
+
+Regardless of renderer type, immediately after init completes, force:
+
+```js
+this.renderer.setSize(window.innerWidth, window.innerHeight);
+this.camera.aspect = window.innerWidth / window.innerHeight;
+this.camera.updateProjectionMatrix();
+window.dispatchEvent(new Event('resize'));
+```
+
+Real desktop browsers sometimes have a timing gap where the canvas dimensions aren't set correctly at the moment the first frame renders.
+
+**Step 5 — Confirm world/scene is ready before loop starts**
+
+If world assets (GLTF models, textures, HDR environment maps) are loaded asynchronously, the animation loop must not start until they're ready. Gate the loop behind full world load:
+
+```js
+await Promise.all([
+  this.renderer.init(),   // or the WebGL2 equivalent
+  this.world.load()       // all models, textures, scenes
+]);
+this.renderer.setAnimationLoop(() => this.update());
+```
+
+---
+
+### ✅ Tablet
+
+While fixing the above, confirm the WebGL2 fallback path (Step 3) also covers tablet browsers — iPadOS Safari and Chrome on Android tablets should both hit the WebGL2 path cleanly. Do not use user-agent sniffing; use feature detection only.
+
+---
+
+### CONSTRAINTS
+
+- Touch **nothing** that is currently working (audio, mobile, build pipeline, menu, map, env vars, LFS workflow)
+- Test on the preview before pushing
+- Push with: `git add -A && git commit -m "Fix: WebGL2 fallback for desktop GPU — resolves blank canvas on real hardware" && git push origin main`
+- Confirm the GitHub Actions build completes and wasiu.tech is live before signing off
