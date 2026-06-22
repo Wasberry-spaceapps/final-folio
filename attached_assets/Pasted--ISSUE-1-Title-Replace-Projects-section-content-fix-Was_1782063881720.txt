@@ -1,0 +1,133 @@
+
+## ISSUE 1
+
+**Title:** Replace Projects section content, fix Wasiu's Home tab text, increase Career section font size
+
+**Body:**
+
+### Context
+You inserted specific project write-ups into the PROJECTS section but used AI-generated text. That needs to be corrected. Two smaller, unrelated text/style fixes are bundled into this same issue because they are low-risk content edits, not feature changes.
+
+### Task 1 — Replace PROJECTS section content
+First, locate the data source for the Projects section (likely a JS/JSON/TS file or array of objects with fields like title, description, links — inspect the existing structure before editing so the new content slots into the *same* fields/format and doesn't break the existing UI/layout). Do **not** rewrite, summarize, or paraphrase any of the text below — replace the current placeholder/AI-generated text with this content **verbatim**, preserving the order (1–10):
+
+```
+1. Interesting sparks: HTML and CSS
+High school was great. Messing around on the computer was greater. I had my first introduction to these languages in about grade 11, and it completely spurred my interest in wanting to personally learn more and more about them from the internet. I downloaded textbooks. I copied code from tutorial sites. And in the good ol' days when there were no AIs, I searched and searched the internet for how to get things right. I learnt more, became better, built more.
+
+2. Ambition: Video Editing
+I learnt and applied the principles of video editing. Wondershare Filmora was a great tool of choice! Eventually, I ended up running a YouTube channel during the pandemic lockdown.
+Link - https://www.youtube.com/@spookystories5087
+Some video works - https://www.instagram.com/wasberry4/
+
+3. Hope...: LASUSU
+I began writing in 2021, and luckily, won 1st place in the LASUSU Essay Competition. This early validation of my growing literary voice created a surge in confidence — confidence that I could try my best, and perhaps my best could lead me somewhere.
+
+4. A temper against pain: Intelsat Space STEM Programs
+I was part of the 30 students selected for the 2023 Intelsat Space STEM Program.
+I learnt about environmental variables here on Earth, their relation to space technologies, and how satellites can be used to track these variables.
+I performed hands-on scientific experiments using an ESP32-based kit to capture variables like humidity and light intensity. I took this further by enrolling in the practical Intelsat TinyGS program, whose aim was to assemble a TinyGS kit, learning to receive data packets directly from LoRa satellites.
+Some experiments I worked on:
+https://drive.google.com/file/d/1bAVycxlVpaaYygnHKVMpxOlrQAMVwDi_/view?usp=sharing
+https://docs.google.com/document/d/1y6pBl9x6j1uWpxx6kMfw9tg8WTdbBt8U3LIu9hCZ0Gk/edit?usp=sharing
+
+5. Glad Tidings: Website Management
+I served as a website manager for a local bookstore for a while in 2022. My responsibilities included uploading book images alongside adding corresponding names, descriptions, prices and categories, ensuring that the online catalog matches the on-site inventory. I also worked to integrate a WhatsApp click-to-chat button on each product page to facilitate discussions for buying and negotiation.
+I took charge of making sure Wordpress optimizations and security plugins were up to date.
+Link to an example catalog database I worked on - https://drive.google.com/drive/folders/1uV-Yh8nj5eAtKvCZdpeY6rOTtn7m8-lt?usp=sharing
+
+6. Ambition: Roblox and Anki Concept Development
+Anki add-ons (extensions) vibecoding - https://drive.google.com/folderview?id=1Y7xWGiSvxPs9hibJySVHjkbMTv2xWLd1
+Developed a roblox memory palace environment for Pathology (Roblox marketplace assets used). Demo video available on demand
+
+7. ...To aspire: CompTIA A+ IT certification
+To land a helpdesk role, I decided to study the comprehensive CompTIA A+ curriculum. The 220-1101 curriculum focuses on hardware, networking, mobile devices, and virtualization, and includes Motherboards & Internal Components, Wireless Standards, Tools & Cabling, etc. While I ultimately chose not to sit for the exam, I absorbed the theoretical troubleshooting models. Understanding the mechanics of how IT systems fail and are systematically repaired was indeed, an incredible journey.
+Training course I used for preparation - https://www.professormesser.com/free-a-plus-training/220-1101/220-1101-video/220-1101-training-course/
+Official CompTIA A+ site - https://www.comptia.org/en/certifications/a/core-1-v15/
+
+8. Getting better every day: Building a personal flashcard system
+Anki (a flashcard program) is great. For a person 'like me,' however, it could be better. Late last year, Anki wasn't cutting it — I needed to review about 16 individual cards in one single screen (rather than the 1 card per screen that Anki natively serves us) to be faster. So I vibecoded a flashcard application (HTML-based) that runs in a browser and whose progress is saved and persistent, even across PC shutdowns, via a server.
+I also developed a system to convert my existing Anki cards (with links to embedded media) to a .txt file. Then, the .txt file could be imported straight into the flashcard application. A local server system then serves the right images to the right individual cards in the browser as I review my cards, whilst also ensuring that the images load almost instantaneously, all in a single HTML file.
+Youtube video demo - https://youtu.be/hGAVUHDFObY
+Link to codebase: https://mega.nz/file/ijZVmABQ#Zk2iYT6rHNXrAVK7eyvwc9m16GsFb0vRPXR9WwaLwzY
+
+9. Ambition: R programming language course
+Earlier this year, I undertook an introductory R programming course by Carnegie Mellon University. It provided me with basic information about R syntax and the RStudio interface. I learned how to import CSV files, the structure of data frames, how to deal with factors, how to add/remove rows and columns, and how to calculate summary statistics from a data frame. It was my first step into the environment of statistical computing and structured analysis.
+Link to CMU course - https://cmu-lib.github.io/os-workshops/reproducible-research/Introduction%20to%20R.pdf
+
+10. Hope: Writing a blog
+Ryan Holiday wrote that great entrepreneurs don't go searching the streets for opportunities; they open themselves to noticing the little things around them. I needed a job, and I could write! So I channeled my time and stillness toward crafting pieces from truths I had been learning. I established my blog as a curated space for exploring the intersections of medicine, poetry, history, and philosophy. Hosting pieces like 'Be Silent' and 'Hercules' Odyssey,' the minimalist focus prioritizes deep reading over fleeting engagement. By living and breathing the art of writing in this space, I aim to continuously refine my voice and produce greater works.
+Selected works:
+Be Silent - https://gracioushope.substack.com/p/be-silent
+A Brief History of Trepanning - https://gracioushope.substack.com/p/a-brief-history-of-trepanning
+Sweet Biscuit - https://gracioushope.substack.com/p/sweet-biscuit
+On the Importance of Wisdom - https://gracioushope.substack.com/p/on-the-importance-of-wisdom
+```
+
+### Task 2 — 
+I dont like the container inside which the current project details are written. Instead, make the projects details (e.g "I began writing in 2021, and luckily, won 1st place in the LASUSU Essay Competition. This early validation of my growing literary voice created a surge in confidence — confidence that I could try my best, and perhaps my best could lead me somewhere.") come out fully in the exact same window like the Menu window (I love that UI) with left and right buttons (or swipe left and right for non-desktop screens) and cancel button like what is on the current Menu window to exit the experience. Of course, there will be no need for separate tabs on this window (unlike the normal menu window which has tabslike Behind the scene, Achievements, etc). Just the window, and text written on it.
+
+
+### Task 3 — Turn every link into a "Link to Project" button
+Every raw URL above must NOT be displayed as plain visible text. Instead, render each one as a styled, clickable button-like element (reuse the site's existing button styling if one exists; otherwise create a simple consistent button style), opening in a new tab (`target="_blank" rel="noopener noreferrer"`). Rules for labeling:
+- Use the descriptive text that already precedes a link as that button's label, with trailing `-`/`:` stripped (e.g. "Link to an example catalog database I worked on -" → button labeled "Link to an example catalog database I worked on").
+- If a link has no preceding descriptive text at all, label the button "Link to Project".
+- Where one label precedes two links in a row (this happens once, in item 4, under "Some experiments I worked on:"), render two separate buttons and disambiguate them sensibly (e.g. number them "1" / "2", or infer short suffixes like "(file)" / "(doc)" from the link type) — use your judgement, just don't merge them into one button or leave one unlabeled.
+- In item 6, "Demo video available on demand" has no URL attached — leave this as plain text, do not turn it into a link/button.
+- Item 3 (LASUSU) has no link at all — no button needed there.
+
+### Task 4 — Wasiu's Home tab text
+Find the component/content for the "Wasiu's Home" tab in the menu/navigation and replace its current text with the following, verbatim:
+
+```
+Wasiu's Home
+Welcome!
+
+My name is Wasiu Mutairu, and I'm a Medical Student & Technology Enthusiast.
+
+I am bridging the gap between clinical medicine, digital tools, IoT networks, and creative writing.
+
+I've been writing, and you can access my Substack blog via gracioushope.substack.com
+
+NOTE: This portfolio is undoubtedly great, with elite-tier implementations of Three.js, WebGL, 3D models, etc, but I did not build this project - Bruno Simon (https://bruno-simon.com/) did. And graciously, he made it available for use under a MIT license.
+
+So I forked the GitHub repo, and got to work. I spent quality time vibecoding to edit, remove models, add in new elements, and fine-tune it to a personal taste!
+
+Drive around to learn more about me — and don't break anything!
+```
+The `gracioushope.substack.com` mention and the `https://bruno-simon.com/` mention should also be clickable links (you can leave these as inline text links rather than buttons, since they're embedded mid-sentence — just make them clickable and open in a new tab).
+
+### Task 4 — Increase Career section font size
+Locate the CSS/SCSS/styled-component controlling the text in the CAREER section. The current font size is too small to read comfortably. Increase it noticeably (a reasonable starting point is +20–30% over the current value, e.g. moving up one standard step on whatever type scale the project uses), then verify at common breakpoints (mobile, tablet, desktop) that the larger text doesn't overflow its container, get clipped, or break the existing layout. Do not change colors, fonts, or weights — font-size only, unless line-height needs a proportional nudge to keep things readable.
+
+### Acceptance criteria
+- [ ] All 10 Projects entries match the verbatim text above exactly, in order, with no AI-paraphrased text remaining.
+- [ ] Every URL is hidden behind a styled button/link as described, none displayed as raw text.
+- [ ] Wasiu's Home tab matches the verbatim text above, with the two inline links working.
+- [ ] Career section text is visibly larger and remains responsive/non-overflowing at mobile, tablet, and desktop widths.
+- [ ] No unrelated visual or functional regressions elsewhere on the site.
+
+---
+
+## ISSUE 2
+
+**Title:** Make the initial "A LITTLE PATIENCE" loading popup appear immediately on page load
+
+**Body:**
+
+### Context
+This is a portfolio with a known, existing popup that displays "A LITTLE PATIENCE. 3D-Heavy Portfolio :)" while assets load. This feature already exists — **do not rebuild it from scratch**, only change *when* it triggers. Right now it appears too late, so visitors who land on the page while heavy assets are still downloading see what looks like a blank page and may leave before the popup ever shows up.
+
+### Task
+Find the current trigger logic for this popup (likely tied to a Three.js LoadingManager event, an asset-progress threshold, or a `setTimeout` delay) and change the condition so the popup renders as close to immediately as technically possible — i.e., as soon as the page begins loading/the app mounts, not after assets reach some loading percentage or after a fixed delay of more than a fraction of a second. The popup should appear while heavy assets are still loading in the background, so the visitor understands the page is working rather than broken.
+
+### Constraints
+- Do not change the popup's visual design, copy, or styling — timing only.
+- Preserve whatever existing mechanism lets the user dismiss it / proceed into the experience (e.g. a click-to-start interaction or a loading bar underneath it) — that behavior must keep working exactly as it does now.
+- Make sure this change doesn't cause the popup to flash and disappear before assets are actually ready, and doesn't break the existing loading-progress indicator if one exists alongside it.
+
+### Acceptance criteria
+- [ ] The popup is visible within a fraction of a second of the page starting to load, well before heavy 3D assets finish downloading.
+- [ ] Existing dismiss/proceed interaction still works unchanged.
+- [ ] No regression to the loading bar/progress UI if one exists.
+- [ ] Popup visuals/copy are untouched — only the trigger timing changed.

@@ -1,0 +1,75 @@
+A. I love the menu window you used now for the PROJECTS section content. It's great! Great on both PC and other screen sizes. The only problem is that when it's opened on a smaller screen like mobile, the window fits (snaps) perfectly to the visible screen size that the 'X' button for cancelling out of the experience is not visible and it is impossible to cancel out. Only the left and right buttons on top of the window are visible to switch left and right between projects. 
+
+Fixes:
+- It shouldnt take up the entire screen on smaller screens like tablet or mobile.
+- Make the 'X' button also on the top, like the well-positioned left and right buttons, but not near them.
+
+As for the projects themselves, just a few corrections:
+1. The Project 6/10 should be renamed to this:
+"6. Ambition: Roblox and Anki Concept Development
+I vibecoded some Anki add-ons (extensions) to suit my personal preferences. Link to add-on - https://drive.google.com/folderview?id=1Y7xWGiSvxPs9hibJySVHjkbMTv2xWLd1
+
+I personally developed a roblox memory palace environment for Pathology (Roblox marketplace assets used). Demo video available on demand"
+
+2. The Project 9/10 should be renamed to this:
+" Earlier this year, I undertook an introductory R programming course by Carnegie Mellon University, establishing a foundation in programmatic data analysis. I learned core principles like vector subsetting, handling missing values, and navigating RStudio. For practical data wrangling, I learned to chain commands, efficiently filter datasets, engineer variables, and generate summary statistics from CSVs. Link to CMU course - https://cmu-lib.github.io/os-workshops/reproducible-research/Introduction%20to%20R.pdf "
+    
+
+B. Remove 'Made with Replit' or 'Build for free' popups if you can find them.
+
+C. In the BEHIND THE SCENE tab in the menu window, please change this:
+
+"Education
+Medical Student (MB;BS path) — LASUCOM, 2021 – Present
+
+— Wasiu"
+
+to 
+
+"Education
+Medicine
+Current
+
+— Wasiu"
+
+With 'Current' italized and grayed.
+
+D. One more issue, on mobile (phone / tablet) when I open the site, browser (I use Chrome) normally shows me a small popup of 'Install [site name] as an app?'. It showed me 'Install Bruno's as an app?'
+
+Ensure any Bruno reference is replaced
+
+E. ## ISSUE 3
+
+**Title:** Add a realistic, irregular 3D snowfall overlay for the first 18 seconds of the site
+
+### Context
+This site is built on Three.js (forked from bruno-simon.com). Add a new decorative snowfall effect that overlays the existing 3D scene/UI for the first 18 seconds after the site loads, then fades out. This must look organic and irregular — explicitly **not** a uniform grid of identical falling white boxes/squares moving in lockstep, which is the cliché, low-effort version of this effect to avoid.
+
+### Requirements
+
+**Visual irregularity (shape):**
+- Each snowflake should be a small, low-poly, irregularly-shaped 3D object (not a perfect sphere or cube) — e.g. randomly scaled/non-uniformly stretched icosahedrons or similar low-poly geometry, varied per instance so flakes don't look identical to each other.
+- Vary size noticeably across flakes (some smaller, some larger, within a sensible range).
+- Use an efficient rendering approach given this is already an asset-heavy page — e.g. `InstancedMesh` with a capped particle count, rather than spawning hundreds of individual mesh objects.
+
+**Movement irregularity:**
+- Randomize each flake's: starting position, fall speed, rotation speed/axis, and horizontal drift/sway (e.g. a sine-wave sway with randomized amplitude and phase per flake) so no two flakes move identically and nothing reads as a repeating grid pattern.
+- Stagger spawn timing slightly so flakes don't all appear at once.
+
+**Overlay behavior:**
+- The effect must render on top of the existing 3D scene/content as a visual overlay, without obscuring the view of what's underneath and without blocking any mouse/touch interaction with the existing site (driving the car, clicking UI, etc.). If implemented as a separate canvas/DOM layer, use `pointer-events: none`; if integrated into the main scene, make sure it's excluded from raycasting/click targets.
+
+**Lifecycle:**
+- The snowfall should run for the first 18 seconds (tie this to whatever you judge the most sensible start point — e.g. when the site finishes its initial load/the loading popup is dismissed — and note in the PR description which trigger point you chose).
+- After 18 seconds, fade the snowfall out gradually (opacity transition over a couple of seconds) rather than stopping abruptly.
+- Once fully faded, remove the snow objects from the scene and dispose of their geometries/materials so no memory or performance cost lingers afterward.
+
+**Performance:**
+- Keep particle count and geometry complexity conservative given the page is already 3D/WebGL-heavy. Reuse the existing render loop rather than spinning up a second one if at all possible.
+
+### Acceptance criteria
+- [ ] Snowfall looks organic/irregular in shape, size, and motion — no visibly repeating grid pattern or identical flakes.
+- [ ] Effect overlays the scene without blocking clicks/drag/drive interactions.
+- [ ] Effect starts on load, runs ~18 seconds, fades out smoothly, and fully cleans up (no leftover DOM nodes, geometries, or materials).
+- [ ] No noticeable frame-rate drop or added jank on an already asset-heavy page.
+- [ ] PR description states which load event was used as the 18-second start trigger.

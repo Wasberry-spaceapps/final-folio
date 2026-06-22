@@ -1,0 +1,127 @@
+You are an expert frontend developer customizing Bruno Simon's folio-2025 3D portfolio exactly to represent me: Wasiu Mutairu.
+
+Strict rules:
+
+Keep all my wordings exactly as they appear on https://wasiu.tech/ (do not paraphrase or shorten anything).
+Replace every mention of Bruno Simon and his content with mine.
+Do not modify any 3D models, Blender files, physics, or complex Three.js logic.
+Preserve the fun exploratory 3D style.
+Ensure links are hyperlinked and clickable rather than typing out the full-length links bare
+
+
+My exact personal information (use verbatim):
+
+Name: Wasiu Mutairu
+Subtitle: Medical Student & Technology Enthusiast
+Main tagline: Bridging the gap between clinical medicine, digital tools, IoT networks, and creative writing.
+Quote: "If I have seen further it is by standing on the shoulders of Giants" — Isaac Newton
+About Me section:
+"I've got diverse skills across various domains — from writing to IoT device setup, from IT helpdesk to programming languages. Luckily, med school ensured I can even learn new skills fast!"
+"As such, I've learnt a lot and grown a lot too! I hope the projects mentioned here will serve as a brief glimpse into my abilities as a person."
+
+Email: officialmutairu@gmail.com
+Education: Medical Student (MB;BS path) — LASUCOM, 2021 - Present
+
+Exact Projects (replace Bruno’s projects with these — keep the same data structure used in the repo):
+
+Interesting sparks: HTML and CSS
+Category: Programming & Web
+Description: High school was great. Messing around on the computer was greater. I had my first introduction to these languages in about grade 11, and it completely spurred my interest in wanting to personally learn more and more about them from the internet. I downloaded textbooks. I copied code from tutorial sites. And in the good ol' days when there were no AIs, I searched and searched the internet for how to get things right. I learnt more, became better, built more.
+Tags: HTML5; CSS3; Semantic Web Layouts; Browser Rendering
+
+
+
+Ambition: Video Editing
+Category: Media & Video
+Description: I learnt and applied the principles of video editing. Wondershare Filmora was a great tool of choice! Eventually, I ended up running a YouTube channel during the pandemic lockdown.
+YouTube - https://www.youtube.com/@spookystories5087
+Instagram Cut - https://www.instagram.com/wasberry4/
+Tags: Wondershare Filmora; Audio Compression; YouTube Optimization; Timeline Keyframing
+
+
+
+Hope...: LASUSU
+Category: Prose & Writing
+Description: I began writing in 2021, and luckily, won 1st place in the LASUSU Essay Competition. This early validation of my growing literary voice created a surge in confidence — confidence that I could try my best, and perhaps my best could lead me somewhere.
+
+
+
+A temper against pain: Intelsat Space STEM Programs
+Category: IoT & Electronics
+Description: I was part of the 30 students selected for the 2023 Intelsat Space STEM Program.
+
+I learnt about environmental variables here on Earth, their relation to space technologies, and how satellites can be used to track these variables.
+
+I performed hands-on scientific experiments using an ESP32-based kit to capture variables like humidity and light intensity. I took this further by enrolling in the practical Intelsat TinyGS program, whose aim was to assemble a TinyGS kit, learning to receive data packets directly from LoRa satellites.
+Some experiments I worked on:
+https://drive.google.com/file/d/1bAVycxlVpaaYygnHKVMpxOlrQAMVwDi_/view?usp=sharing
+
+https://docs.google.com/document/d/1y6pBl9x6j1uWpxx6kMfw9tg8WTdbBt8U3LIu9hCZ0Gk/edit?usp=sharing
+
+Tags: ESP32 Hardware; LoRa; TinyGS Satellite Network; Atmospheric Sensors
+
+
+
+...To aspire: CompTIA A+ IT certification
+Category: IT Infrastructure
+Description: To land a helpdesk role, I decided to study the comprehensive CompTIA A+ curriculum. The 220-1101 curriculum focuses on hardware, networking, mobile devices, and virtualization, and includes Motherboards & Internal Components, Wireless Standards, Tools & Cabling, etc. While I ultimately chose not to sit for the exam, I absorbed the theoretical troubleshooting models. Understanding the mechanics of how IT systems fail and are systematically repaired was an indeed eye-opening experience.
+
+Training course used for preparation - https://www.professormesser.com/free-a-plus-training/220-1101/220-1101-video/220-1101-training-course/
+
+Official CompTIA A+ site - https://www.comptia.org/en/certifications/a/core-1-v15/
+Tags: TCP/IP; Networking; VM Virtualization; Hardware; Systems Workspace Troubleshooting
+
+
+
+Getting better every day: Building a personal flashcard system
+Category: Programming & Web
+Description: Anki (a flashcard program) is great. For a person ‘like me,’ however, it could be better. Late last year, Anki wasn’t cutting it — I needed to review about 16 individual cards in one single screen (rather than the 1 card per screen that Anki natively serves us) to be faster. So I vibecoded a flashcard application (HTML-based) that runs in a browser and whose progress is saved and persistent, even across PC shutdowns, via a server.
+
+Details
+I also developed a system to convert my existing Anki cards (with links to embedded media) to a .txt file. Then, the .txt file could be imported straight into the flashcard application. A local server system then serves the right images to the right individual cards in the browser as I review my cards, whilst also ensuring that the images load almost instantaneously, all in a single HTML file.
+
+Youtube video demo - https://youtu.be/hGAVUHDFObY
+
+Link to codebase:
+https://mega.nz/file/ijZVmABQ#Zk2iYT6rHNXrAVK7eyvwc9m16GsFb0vRPXR9WwaLwzY
+Tags: Anki Text Parser; Active Recall System; Local Server Environment; HTML5 Offline Engine
+
+
+
+Ambition: R programming language course
+Category: Data Analysis
+Description: Earlier this year, I undertook an introductory R programming course by Carnegie Mellon University. It provided me with basic information about R syntax and the RStudio interface and learned things like the structure of data frames, how to create a chart from a data frame, etc. It was my first step into the environment of statistical computing and structured analysis.
+
+Link to CMU course - https://cmu-lib.github.io/os-workshops/reproducible-research/Introduction%20to%20R.pdf
+Tags: R Programming; RStudio; Charting
+
+
+
+Hope: Writing a blog
+Category: Prose & Writing
+Description: Ryan Holiday wrote that great entrepreneurs don't go searching the streets for opportunities; they open themselves to noticing the little things around them. I needed a job, and I could write! So I channeled my time and stillness toward crafting pieces from truths I had been learning. I established my blog as a curated space for exploring the intersections of medicine, poetry, history, and philosophy. Hosting pieces like 'Be Silent' and 'Hercules' Odyssey,' the minimalist focus prioritizes deep reading over fleeting engagement. By living and breathing the art of writing in this space, I aim to continuously refine my voice and produce greater works.
+
+Selected works:
+Be Silent - https://gracioushope.substack.com/p/be-silent
+A Brief History of Trepanning - https://gracioushope.substack.com/p/a-brief-history-of-trepanning
+Sweet Biscuit - https://gracioushope.substack.com/p/sweet-biscuit
+On the Importance of Wisdom - https://gracioushope.substack.com/p/on-the-importance-of-wisdom
+
+
+
+Task for you:
+
+Explore the project structure.
+Start with the most important files: sources/data/projects.js (or wherever projects are defined), sources/index.html, and any other data files (achievements, social, etc.).
+Update all text (name, title, meta tags, intro panel, projects, about, footer, etc.).
+For every file you change, provide:
+The full updated file content
+A short summary of changes
+
+**Remove all links or credits or any other identifying information of Bruno and put me there
+
+After the first few files, tell me what to do next (e.g. restart dev server).
+
+Ensure to follow the MIT license of the repo by doing the necessary attribution in the code, but not visible to site users.
+
+Begin now by reading the key data files and outputting the fully updated projects.js (or equivalent) first.	

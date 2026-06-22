@@ -1,0 +1,81 @@
+You did great! And I enjoyed playing the game! Just these fixes please:
+
+1. There's a project timeline in the CAREER section that runs from 2008 - 2025. Its great, but not tailored to me. Here are my information instead:
+
+a. 2016, 2017, 2018. High School - HTML and CSS training
+
+b. 2020 / 2021. Video Editing and YouTube channel
+
+c. 2021. Writing - Won LASUSU Essay Competition
+
+d. 2023. Internet of Things, IoT (Intelsat Space STEM Program & Intelsat TinyGS Program)
+
+e. 2023. Website Manager Position - Ovic Bookshop
+
+f. 2025. IT Certification Preparation - CompTIA A+ 220-1101 Module
+
+g. 2025. Anki add-ons (extensions) vibecoding - For added personalized functionality
+
+h. 2025. Roblox memory palace game
+
+i. 2026. Building a better flashcard software that overcomes Anki's limitations
+
+j. 2026. Introduction to R Programming Course by Carnegie Mellon University
+
+k. 2026. Started a Substack Blog - The Gracious Hope blog
+
+ONLY in that CAREER section.
+
+
+
+- Please restore the music functionality and setup to exactly what it was from the github page without breakin any functionality
+
+- The PROJECTS section dont contain any of my project details. They, however, do contain the names of the projects (e.g HTML & CSS, video editin) but do not contain the writeups I provided (e.g "High school was great. Messing around on the computer was greater. I had......."). Please ensure those details are somehow made to come up as a popup window like the menu window (the one that's accessible by clicking the 3 horizontal lines on top right screen corner) as I am rotating through the individual projects. All the details I'd given you and links (even where there were two links for a particular project) must be included and clickable (as in hyperlinked and indicated to be a link, and embedded within a 'Link to Project' button).
+
+And lastly, please add these two projects also to the other projects:
+
+First one
+"Glad Tidings
+I served as a website manager for a local bookstore for a while in 2022. My responsibilities included uploading book images alongside adding corresponding names, descriptions, prices and categories, ensuring that the online catalog matches the on-site inventory. I also worked to integrate a  WhatsApp click-to-chat button on each product page to facilitate discussions for buying and negotiation.
+
+I took charge of making sure Wordpress optimizations and security plugins were up to date.
+
+Link to an example catalog database I worked on - https://drive.google.com/drive/folders/1uV-Yh8nj5eAtKvCZdpeY6rOTtn7m8-lt?usp=sharing "
+
+
+Second one
+"Ambition
+Anki add-ons (extensions) vibecoding - https://drive.google.com/folderview?id=1Y7xWGiSvxPs9hibJySVHjkbMTv2xWLd1
+
+Developed a roblox memory palace environment for Pathology (Roblox marketplace assets used). Demo video available on demand"
+
+
+
+
+- In the menu window, please help me replace what is currently written in the 'WASIU'S HOME' tab with this:
+"Welcome!
+
+My name is Wasiu Mutairu, and I'm a Medical Student & Technology Enthusiast.
+
+I am bridging the gap between clinical medicine, digital tools, IoT networks, and creative writing.
+
+I've been writing, and you can access Substack blog via https://gracioushope.substack.com/?sort=top 
+
+Drive around to learn more about me — and don't break anything!"
+
+- Please make the Substack link clickable and shiny.
+
+- In the BEHIND THE SCENES, please help me tweak this:
+"Thank you for visiting my portfolio!
+If you are curious about the stack and how I built this project, here’s everything you need to know."
+
+to this:
+"Thank you for visiting my portfolio!
+If you are curious about me and how I came about my projects, here’s everything you need to know."
+
+- When the very first thing that loads on the website shows up, and before all the other things come up, I want there to be a brief popup (exactly the one used for 'Now Playing - .....' popup) that comes up with the message "Just a little patience
+3D-heavy potfolio :)" in that exact line-broken format as I'd written
+
+- Remove the LAB section
+
+- Remove 'Made with Replit' popup if you can find it.

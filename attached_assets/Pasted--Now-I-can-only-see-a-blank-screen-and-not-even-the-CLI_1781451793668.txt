@@ -1,0 +1,23 @@
+- Now I can only see a blank screen and not even the 'CLICK TO START' screen and nothin is loading. Nothin at all. Did you break anything? Perhaps the time you were fiddling with the first soundtrack?
+
+- Since I am not within the game and cant see other potential touch points, I will try to provide you with some other guidance from a blind point of view:
+
+- Like the way you helped me remove the 'BRUNO SIMON' physics characters from that place near the initial place, please ensure any other bruno characters throughout the games are also removed. And this includes that name being written in ANY FORM throughout the entire project base - whether it be 3d, or engraved or embossed into any surface, or written with text, or a picture, or any other form.
+
+- I am thinking for you to please help me no longer delete the 'BRUNO SIMON' physics characters, but instead rename it to 'WASIU MUTAIRU'. That'd be better.
+
+- The reason I told you to remove the 'Options' page in the menu screen is because it contained a screenshot image of the game beginning and inadvertently, captured the bruno simo physics character. As such, if you can analyze images, if there are any other images like that that reveals bruno, please remove them.
+
+- In the menu screen, under one of the pages (cant remember but think its the 'Behind the scene' page), please rename the text from 'Bridging the gap' to 'I am bridging the gap'
+
+Aesthetics
+- Though I had mentioned that my details be written / placed just the way I wrote them, please put aestehtics into this also. No text should be jumbled or crammed together or have an irregular appearance. If space for text set by Bruno is too small, or cant be edited by code (e.g a 3d structure) such that it won't lose pleasing appearance, see if you can replicate those pointers (I don't know exactly what to call them), as in beacons, he scattered throughout the game canvas so when users click on / tap on, it will bring out the similar screens he used and the project details will be displayed properly within them
+
+But if the beacons route is to be gone on, make them have clear text notices so the user is well prompted to open them up, e.g Project > IoT & Electronics, Project > IT Infrastructure, etc.
+
+- DO NOT, in editing the codebase, now spoil the aestehtics please.
+
+- Retain his used fonts please
+
+Exportability
+- Please ensure I am able to push all my progress to Github or export my files from here
