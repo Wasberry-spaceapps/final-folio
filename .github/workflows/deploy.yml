@@ -35,6 +35,8 @@ jobs:
           npm install @swc/core --legacy-peer-deps
 
       - name: Build
+        env:
+          VITE_MUSIC: true
         run: npm run build
 
       - name: Upload Pages artifact

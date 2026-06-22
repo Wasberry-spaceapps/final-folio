@@ -64,11 +64,13 @@ export class Rendering
             this.renderer.inspector = new Inspector()
         }
 
+        // Init renderer first (WebGPU init is async — starting the animation loop before
+        // init completes causes frames to fire on an uninitialised GPU context, corrupting
+        // the command queue on desktop WebGPU and leaving the canvas blank)
+        await this.renderer.init()
+
         // Make the renderer control the ticker
         this.renderer.setAnimationLoop((elapsedTime) => { this.game.ticker.update(elapsedTime) })
-
-        return this.renderer
-            .init()
     }
 
     setPostprocessing()
