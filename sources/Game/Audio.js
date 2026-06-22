@@ -171,11 +171,15 @@ export class Audio
             song.loaded = false
             song.sound = new Howl({
                 src: [ song.path ],
-                pool: 0,
+                pool: 1,       // pool:0 is invalid (no instances); 1 = one concurrent instance
                 autoplay: false,
                 loop: false,
-                preload: false,
+                preload: true, // start downloading immediately during the loading screen
                 volume: 0.2,
+                onload: () =>
+                {
+                    song.loaded = true
+                },
                 onend: () =>
                 {
                     this.playlist.next()

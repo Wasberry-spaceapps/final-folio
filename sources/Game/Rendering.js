@@ -37,16 +37,20 @@ export class Rendering
 
     async setRenderer()
     {
+        // antialias MUST be false when using RenderPipeline (post-processing).
+        // On WebGPU, enabling MSAA on the swap chain while the pipeline renders through
+        // off-screen textures causes a format mismatch — the canvas presents blank frames.
+        // This primarily affects desktop (pixelRatio=1) where antialias would otherwise
+        // be true; mobile (pixelRatio≥2) was already safe. RenderPipeline provides its
+        // own AA via the bloom/DOF passes anyway.
         this.renderer = new THREE.WebGPURenderer({
             canvas: this.game.canvasElement,
             powerPreference: 'high-performance',
             forceWebGL: false,
-            antialias: this.game.viewport.pixelRatio < 2
+            antialias: false
         })
-        this.renderer.setSize(this.game.viewport.width, this.game.viewport.height)
-        this.renderer.setPixelRatio(this.game.viewport.pixelRatio)
-        this.renderer.sortObjects = false
 
+        this.renderer.sortObjects = false
         this.renderer.domElement.classList.add('experience')
         this.renderer.shadowMap.enabled = true
         // this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
@@ -64,12 +68,16 @@ export class Rendering
             this.renderer.inspector = new Inspector()
         }
 
-        // Init renderer first (WebGPU init is async — starting the animation loop before
-        // init completes causes frames to fire on an uninitialised GPU context, corrupting
-        // the command queue on desktop WebGPU and leaving the canvas blank)
+        // Await init before setting size — on WebGPU, init() is truly async (GPU adapter
+        // negotiation). Calling setSize before init completes leaves the swap chain with
+        // wrong dimensions on some desktop drivers.
         await this.renderer.init()
 
-        // Make the renderer control the ticker
+        // Set canvas size after init so the GPU swap chain is configured correctly
+        this.renderer.setSize(this.game.viewport.width, this.game.viewport.height)
+        this.renderer.setPixelRatio(this.game.viewport.pixelRatio)
+
+        // Start the animation loop only after full initialisation
         this.renderer.setAnimationLoop((elapsedTime) => { this.game.ticker.update(elapsedTime) })
     }
 

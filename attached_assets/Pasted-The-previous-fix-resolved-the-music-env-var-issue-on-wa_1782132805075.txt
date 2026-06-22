@@ -1,0 +1,80 @@
+The previous fix resolved the music env var issue on wasiu.tech site (GitHub...), but there are still **three unresolved problems**. Please fix all three carefully **without introducing any new bugs** — this is a heavy Three.js/WebGL/WebGPU 3D portfolio project (similar in architecture to bruno-simon.com), so tread carefully with the rendering pipeline.
+
+---
+
+### ❌ ISSUE 1 — PC Desktop: Blank canvas after clicking 'CLICK TO START'
+
+The WebGPU async init race condition fix (`await this.renderer.init()` before `setAnimationLoop`) did **not** resolve this. On PC desktop, after clicking the start button, only a blank canvas is shown alongside the menu and map buttons. The full 3D world never appears. Mobile still works fine.
+
+**Please investigate the following angles, not just the animation loop order:**
+
+- **WebGPU fallback**: On desktop Chrome/Firefox, if `navigator.gpu` exists but the adapter request fails or returns null (e.g. due to GPU policy, iGPU restrictions, or browser flags), the renderer may silently fail with no console error. Confirm there is a proper `try/catch` around `adapter = await navigator.gpu.requestAdapter()` and that a **WebGL2 fallback** is triggered if WebGPU is unavailable or unsupported.
+- **Canvas sizing on desktop**: After `init()` resolves, confirm `renderer.setSize()` is called with the correct window dimensions. On desktop, if the canvas has `width: 0` or `height: 0` at the time of the first render call, it will appear blank. Force a `renderer.setSize(window.innerWidth, window.innerHeight)` and a `camera.aspect` update with `camera.updateProjectionMatrix()` immediately after init resolves, before the first frame.
+- **Scene/world initialization timing**: Confirm that the scene, lights, 3D models, and world objects are all fully loaded and added to the scene **before** the first render frame fires. If world loading is also async (GLTF models, textures, etc.), the animation loop may be rendering an empty scene. Consider gating the loop start behind a `Promise.all([renderer.init(), world.load()])` or equivalent.
+- **postProcessing.render() on desktop vs mobile**: If `postProcessing` uses a `WebGLRenderer` internally but the main renderer switches to WebGPU on desktop, there could be a context mismatch. Log the renderer type being used on desktop to confirm.
+- **Event / resize handler**: On desktop, a `resize` event sometimes needs to fire once manually after init to correctly size the canvas. Try dispatching `window.dispatchEvent(new Event('resize'))` after the renderer is ready.
+
+Do **not** just move code around blindly — read the actual renderer init flow, identify exactly where desktop diverges from mobile, and fix the root cause.
+
+---
+
+### ❌ ISSUE 2 — Music: Long delay before starting after 'CLICK TO START'
+
+The music track takes an unacceptably long time to begin playing after the user enters the game world. It should start **immediately** (or near-instantly) on start.
+
+**Likely causes:**
+- The audio files (MP3s, 6MB each) are being fetched and decoded **on demand** when `play()` is called, instead of being preloaded during the loading screen.
+- Howler.js supports a `preload: true` option (which is default) but if the `Howl` objects are being instantiated *after* the start button is clicked instead of *before*, the files won't be ready.
+
+**Fix approach:**
+- Ensure `Howl` instances for the music playlist are created (and thus preloading begins) **during the initial loading phase**, not after the start button is clicked.
+- If using a custom audio manager/playlist class, verify that `new Howl({ src: [...], preload: true })` is called at app startup.
+- Optionally, listen for the Howler `onload` event on each track to confirm they're loaded before trying to play.
+
+---
+
+### ❌ ISSUE 3 — Music: Breaks/silence between tracks, no continuous loop
+
+After one track finishes (e.g. `Boy.mp3`), the next track does not begin. The playlist should loop **continuously and seamlessly**.
+
+**Likely causes:**
+- The `onend` callback on each `Howl` instance may not be correctly advancing to the next track in the playlist.
+- The playlist index may not be cycling (e.g. resetting to 0 after the last track).
+- In `Audio.js`, check the playlist advancement logic — it should follow this pattern:
+
+```js
+playNext() {
+  this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
+  this.playlist[this.currentIndex].play();
+}
+```
+
+And each `Howl` should be initialised with:
+
+```js
+new Howl({
+  src: ['track.mp3'],
+  onend: () => this.playNext()
+})
+```
+
+- Also confirm that `onend` isn't being overwritten or that a `loop: true` on the individual Howl isn't conflicting with the playlist logic.
+
+---
+
+### ✅ TABLET COMPATIBILITY
+
+While not currently broken (untested), please proactively confirm:
+- The renderer detection logic (WebGPU vs WebGL2) works correctly on tablet browsers (Safari on iPadOS, Chrome on Android tablet).
+- Touch input and canvas sizing behave correctly at tablet viewport sizes.
+- No hardcoded `isMobile` checks are excluding tablets from the correct rendering path — use proper feature detection instead of user-agent sniffing where possible.
+
+---
+
+### GENERAL CONSTRAINTS
+
+- Do **not** alter any working systems (environmental audio, map, menu buttons, mobile rendering, LFS workflow, env vars).
+- After each fix, verify the dev server still runs cleanly on Replit before pushing.
+- When done, push with a descriptive commit:
+  `git add -A && git commit -m "Fix: WebGPU desktop blank canvas + music preload delay + playlist continuity" && git push origin main`
+- Confirm the GitHub Actions build completes successfully and the live site at wasiu.tech reflects the changes.
